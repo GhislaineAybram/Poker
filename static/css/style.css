@@ -1,0 +1,135 @@
+/*
+beige DAD7CD
+vert clair A3B18A
+vert fonce 344E41
+*/
+
+* {
+ background-color: #588157;
+ color: black;
+}
+
+#navbar {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ color: black;
+}
+
+h1 {
+ font-size: xxl;
+ width: auto;
+}
+
+#navbar a {
+ max-width: 100px;
+}
+
+.main {
+ height: auto;
+ width: 97%;
+ justify-content: space-around;
+ border: 2px solid #DAD7CD;
+ padding: 1em;
+}
+
+.cartes {
+ display: flex;
+ justify-content: space-around;
+ width: 100%;
+}
+
+.flop {
+ display: flex;
+ gap: 10em;
+ height: auto;
+}
+
+.titres {
+ display: flex;
+ width: 97%;
+ margin: 0;
+ padding: 2px 1em;
+ background-color: #DAD7CD;
+ justify-content: space-between;
+}
+
+p {
+ margin: 0;
+ background-color: #DAD7CD;
+ color: #344E41;
+ font-size: bold;
+}
+
+.flop-1 {
+ width: 57%;
+ justify-content: space-around;
+}
+
+.flop-2, .flop-3 {
+ width: 19%;
+}
+
+button:hover {
+  transform: translateY(-4px) translateX(-2px);
+  box-shadow: 2px 5px 0 0 black;
+}
+
+button:active {
+  transform: translateY(2px) translateX(1px);
+  box-shadow: 0 0 0 0 black;
+}
+
+.card-img {
+ width: 51px;
+ height: 91px;
+ border-radius: 10px;
+ background-color: white;
+ position: relative;
+ padding: 1.8rem;
+ border: 2px solid #c3c6ce;
+ transition: 0.5s ease-out;
+ overflow: visible;
+}
+
+/*valeur carte*/
+.text-title-red {
+ font-size: 1.5em;
+ color: red;
+ font-weight: bold;
+ background-color: white;
+ text-align: center;
+}
+
+.text-title-black {
+ font-size: 1.5em;
+ color: black;
+ font-weight: bold;
+ background-color: white;
+ text-align: center;
+}
+
+/*Hover*/
+.card-img:hover {
+ border-color: black;
+ box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+}
+
+#buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  background-color: #DAD7CD;
+  color: black;
+  border-radius: 10em;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 1em 2em;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  border: 1px solid black;
+  box-shadow: 0 0 0 0 black;
+  text-decoration: none;
+}

@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Partie en cours</h1>
+<div class="titres">
+    <p class="titre">Les cartes de mon adversaire:</p>
+    <p class="combinaison" id="combinaison-2" onclick="endGame()" style="display: none;">{{ cards['combinaison_player2'] }}</p>
+</div>
+
+<div class="main">
+    <div class="cartes">
+        {% for card in cards['player2'] %}
+            <div class="card-img">
+                {% if card.couleur == "♡" or card.couleur == "♢" %}
+                    <p class="text-title-red">{{ card }}</p>
+                {% else %}
+                    <p class="text-title-black">{{ card }}</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+</br>
+<div class="titres">
+    <p class="titre">Cartes du flop:</p>
+</div>
+<div class="main">
+    <div class="cartes">
+    <div class="flop" id="flop-1" style="display: none;">
+        {% for card in cards['cards_flop'][:3] %}
+            <div class="card-img">
+                {% if card.couleur == "♡" or card.couleur == "♢" %}
+                    <p class="text-title-red">{{ card }}</p>
+                {% else %}
+                    <p class="text-title-black">{{ card }}</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+    <div class="flop" id="flop-2" style="display: none;">
+        {% for card in cards['cards_flop'][3:4] %}
+            <div class="card-img">
+                {% if card.couleur == "♡" or card.couleur == "♢" %}
+                    <p class="text-title-red">{{ card }}</p>
+                {% else %}
+                    <p class="text-title-black">{{ card }}</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+    <div class="flop" id="flop-3" style="display: none;">
+        {% for card in cards['cards_flop'][4:5] %}
+            <div class="card-img">
+                {% if card.couleur == "♡" or card.couleur == "♢" %}
+                    <p class="text-title-red">{{ card }}</p>
+                {% else %}
+                    <p class="text-title-black">{{ card }}</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+    </div>
+</div>
+</br>
+<div class="titres">
+    <p class="titre">Mes cartes :</p>
+    <p class="combinaison" id="conclusion" onclick="endGame()" style="display: none;">{{ cards['conclusion_partie'] }}</p>
+    <p class="combinaison" id="combinaison-1" onclick="endGame()" style="display: none;">{{ cards['combinaison_player1'] }}</p>
+</div>
+<div class="main">
+    <div class="cartes">
+        {% for card in cards['player1'] %}
+            <div class="card-img">
+                {% if card.couleur == "♡" or card.couleur == "♢" %}
+                    <p class="text-title-red">{{ card }}</p>
+                {% else %}
+                    <p class="text-title-black">{{ card }}</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<br>
+<div id="buttons">
+    <button id="button-flop" onclick="toggleCardVisibility()">Etape suivante</button>
+    <a href="/partie"><button id="button-new-game" onclick="newGame()" style="display: none;">Nouvelle partie</button></a>
+</div>
+
+{% endblock %}
