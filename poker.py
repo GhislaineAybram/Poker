@@ -187,6 +187,7 @@ def partie():
     score_player1 = evaluate_hand(hand_player1)
     score_player2 = evaluate_hand(hand_player2)
 
+    #revoir la gestion de l'égalité pour comparer la carte haute
     def is_winner(score_player1, score_player2):
         if score_player1 > score_player2:
             return "Vous avez gagné :)"
@@ -206,26 +207,63 @@ def partie():
 
     card_name_dict = {"2": "deux", "3": "trois", "4": "quatre", "5": "cinq", "6": "six", "7": "sept", "8": "huit",
                       "9": "neuf", "10": "dix", "J": "Valet", "Q": "Dame", "K": "Roi", "1": "As"}
+
+    #revoir cette fonction !!
     def combinaison_hand(hand):
         score = evaluate_hand(hand)
+        values = [i.valeur for i in hand]
+        value_counts = defaultdict(lambda: 0)
+        for v in values:
+            value_counts[v] += 1
+        suits = [i.couleur for i in hand]
+        suit_counts = {}
+        for suit in suits:
+            suit_counts[suit] = suit_counts.get(suit, 0) + 1
         if score == 10:
-            return "une quinte flush royale"
-        if score == 9:
-            return "une quinte flush"
-        if score == 8:
-            return "un carré"
-        if score == 7:
-            return "un full"
-        if score == 6:
-            return "une couleur"
-        if score == 5:
-            return "une quinte"
-        if score == 4:
-            return "un brelan"
-        if score == 3:
-            return "une double paire"
-        if score == 2:
-            return f"une paire"
+            if set(values) == set(["10", "J", "Q", "K", "1"]):
+                return "une quinte flush royale"
+        elif score == 9:
+            rank_values = [card_order_dict[i] for i in values]
+            value_range = max(rank_values) - min(rank_values)
+            suite = [s for s, count in value_counts.items() if count == 1]
+            if len(set(value_counts.values())) == 1 and (value_range == 4):
+                sorted_suite = sorted(suite, key=lambda x: card_order_dict[x], reverse=True)
+                if len(set([card.couleur for card in hand])) == 1:
+                    return f"une quinte flush au {card_name_dict[sorted_suite[0]]}"
+        elif score == 8:
+            carre = [carre for carre, count in value_counts.items() if count == 4]
+            if carre:
+                return f"un carré de {card_name_dict[carre[0]]}"
+        elif score == 7:
+            full3 = [full3 for full3, count in value_counts.items() if count == 3]
+            full2 = [full2 for full2, count in value_counts.items() if count == 2]
+            if full3 and full2:
+                return f"un full aux {card_name_dict[full3[0]]} par les {card_name_dict[full2[0]]}"
+        elif score == 6:
+            couleur = [couleur for couleur, count in suit_counts.items() if count >= 5]
+            high_couleur = max(couleur, key=lambda card: card_order_dict[card.valeur])
+            if couleur:
+                return f"une couleur au {card_name_dict[high_couleur.valeur]} de {high_couleur.couleur}"
+        elif score == 5:
+            rank_values = [card_order_dict[i] for i in values]
+            value_range = max(rank_values) - min(rank_values)
+            suite = [s for s, count in value_counts.items() if count == 1]
+            if len(set(value_counts.values())) == 1 and (value_range == 4):
+                sorted_suite = sorted(suite, key=lambda x: card_order_dict[x], reverse=True)
+                return f"une suite au {card_name_dict[sorted_suite[0]]}"
+        elif score == 4:
+            brelan = [brelan for brelan, count in value_counts.items() if count == 3]
+            if brelan:
+                return f"un brelan de {card_name_dict[brelan[0]]}"
+        elif score == 3:
+            pairs = [pair for pair, count in value_counts.items() if count == 2]
+            if pairs:
+                pairs = sorted(pairs, key=lambda x: card_order_dict[x], reverse=True)
+                return f"une double paire de {card_name_dict[pairs[0]]} par les {card_name_dict[pairs[1]]}"
+        elif score == 2:
+            pairs = [pair for pair, count in value_counts.items() if count == 2]
+            if pairs:
+                return f"une paire de {card_name_dict[pairs[0]]}"
         else:
             high_card = max(hand, key=lambda card: card_order_dict[card.valeur])
             return f"une carte haute : {card_name_dict[high_card.valeur]} de {high_card.couleur}"
