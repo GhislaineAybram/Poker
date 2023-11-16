@@ -3,18 +3,18 @@
 {% block content %}
     <h1>Partie en cours</h1>
 <div class="titres">
-    <p class="titre">Les cartes de mon adversaire:</p>
-    <p class="combinaison" id="combinaison-2" onclick="endGame()" style="display: none;">{{ cards['combinaison_player2'] }}</p>
+    <p class="titre">Les cartes de mon adversaire :</p>
+    <p class="combinaison conclusion" onclick="endGame()" style="display: none;">{{ cards['combinaison_player2'] }}</p>
 </div>
 
 <div class="main">
     <div class="cartes">
         {% for card in cards['player2'] %}
-            <div class="card-img">
+            <div class="card-img card-opponent" style="background-image: url('{{ url_for('static', filename='img/Lotus_back.jpg') }}'); background-size: 100% 100%;">
                 {% if card.couleur == "♡" or card.couleur == "♢" %}
-                    <p class="text-title-red">{{ card }}</p>
+                    <p class="text-title-red card-opponent-value" style="display: none;">{{ card }}</p>
                 {% else %}
-                    <p class="text-title-black">{{ card }}</p>
+                    <p class="text-title-black card-opponent-value" style="display: none;">{{ card }}</p>
                 {% endif %}
             </div>
         {% endfor %}
@@ -22,7 +22,7 @@
 </div>
 </br>
 <div class="titres">
-    <p class="titre">Cartes du flop:</p>
+    <p class="titre">Cartes du flop :</p>
 </div>
 <div class="main">
     <div class="cartes">
@@ -64,8 +64,8 @@
 </br>
 <div class="titres">
     <p class="titre">Mes cartes :</p>
-    <p class="combinaison" id="conclusion" onclick="endGame()" style="display: none;">{{ cards['conclusion_partie'] }}</p>
-    <p class="combinaison" id="combinaison-1" onclick="endGame()" style="display: none;">{{ cards['combinaison_player1'] }}</p>
+    <p class="combinaison conclusion" onclick="endGame()" style="display: none;">{{ cards['conclusion_partie'] }}</p>
+    <p class="combinaison conclusion" onclick="endGame()" style="display: none;">{{ cards['combinaison_player1'] }}</p>
 </div>
 <div class="main">
     <div class="cartes">

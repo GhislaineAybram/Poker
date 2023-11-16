@@ -1,9 +1,11 @@
 from collections import defaultdict, Counter
 
 from flask import Flask, render_template
+
 import random
 
 app = Flask(__name__)
+
 
 @app.route("/")
 def bonjour():
@@ -202,6 +204,8 @@ def partie():
 
     conclusion_partie = is_winner(score_player1,score_player2)
 
+    card_name_dict = {"2": "deux", "3": "trois", "4": "quatre", "5": "cinq", "6": "six", "7": "sept", "8": "huit",
+                      "9": "neuf", "10": "dix", "J": "Valet", "Q": "Dame", "K": "Roi", "1": "As"}
     def combinaison_hand(hand):
         score = evaluate_hand(hand)
         if score == 10:
@@ -221,8 +225,10 @@ def partie():
         if score == 3:
             return "une double paire"
         if score == 2:
-            return "une paire"
-        return "une carte haute"
+            return f"une paire"
+        else:
+            high_card = max(hand, key=lambda card: card_order_dict[card.valeur])
+            return f"une carte haute : {card_name_dict[high_card.valeur]} de {high_card.couleur}"
 
     combinaison_player1 = combinaison_hand(hand_player1)
     combinaison_player2 = combinaison_hand(hand_player2)

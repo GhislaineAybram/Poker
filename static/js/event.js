@@ -1,4 +1,5 @@
 let flopStep = 0
+let gameOver = false
 
 const toggleCardVisibility = () => {
     flopStep += 1;
@@ -7,28 +8,29 @@ const toggleCardVisibility = () => {
         cardDisplay.style.display = "flex";
         };
     if (flopStep === 3) {
+        gameOver = true;
         endGame();
         newGame();
         }
     }
 
 const endGame = () => {
-    const conclusion = document.getElementById("conclusion");
-    const combinaison1 = document.getElementById("combinaison-1");
-    const combinaison2 = document.getElementById("combinaison-2");
-    if (conclusion.style.display === "none") {
-        conclusion.style.display = "flex";
-        }
-    if (combinaison1.style.display === "none") {
-        combinaison1.style.display = "flex";
-        }
-    if (combinaison2.style.display === "none") {
-        combinaison2.style.display = "flex";
-        }
+    const conclusions = document.querySelectorAll(".conclusion");
+    const opponents = document.querySelectorAll(".card-opponent");
+    const opponentValues = document.querySelectorAll(".card-opponent-value");
+    conclusions.forEach(conclusion => {
+        conclusion.style.display = gameOver ? "flex" : "none";
+        });
+    opponents.forEach(opponent => {
+        opponent.style.backgroundImage = gameOver ? "" : "url('{{ url_for('static', filename='img/Lotus_back.jpg') }}')";
+        });
+    opponentValues.forEach(opponentValue => {
+        opponentValue.style.display = gameOver ? "block" : "none";
+        });
     }
 
 const newGame = () => {
-    const buttonNewGame = document.getElementById("conclusion");
+    const buttonNewGame = document.getElementById("button-new-game");
     if (buttonNewGame.style.display === "none") {
         buttonNewGame.style.display = "flex";
         }
