@@ -5,16 +5,16 @@ La version du jeu est un Texas Hold'em (deux cartes privées, cinq cartes commun
 
 ## Projet personnel
 
-## Aperçu du projet
+## Demo
 à venir
 
 ## Aperçu du projet
 
-*Page d'accueil*
-![App Screenshot](/screen/xx.jpg)
+*Partie en cours*
+![App Screenshot](/static/img/screen_partie_en_cours.jpg)
 
 *Partie terminée*
-![App Screenshot](/screen/xx.jpg)
+![App Screenshot](/static/img/screen_partie_terminee.jpg)
 
 ## Tech Stack
 
